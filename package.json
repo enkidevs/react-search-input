@@ -1,0 +1,29 @@
+{
+  "name": "react-search-input",
+  "version": "0.1.0",
+  "description": "Simple react.js component for a search input, providing a filter function.",
+  "main": "react-search-input.js",
+  "dependencies": {
+    "react": "^0.12.0"
+  },
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/enki-com/react-search-input"
+  },
+  "keywords": [
+    "react",
+    "search",
+    "input",
+    "filter",
+    "component",
+    "javascript",
+    "react-component"
+  ],
+  "author": "Mathieu Dutour",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/enki-com/react-search-input/issues"
+  },
+  "homepage": "https://github.com/enki-com/react-search-input"
+}
