@@ -1,10 +1,6 @@
 .search-input {
   padding: 10px 10px;
   height: 52px;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 2;
 }
 
 .search-input .search-wrapper {
@@ -28,7 +24,6 @@
   width: 100%;
   font-size: 18px;
   border: none;
-  border-radius: 4px;
   line-height: 22px;
   padding: 5px 10px 5px 25px;
   height: 32px;
