@@ -4,7 +4,7 @@
     "react-search-input.js",
     "react-search-input.css"
   ],
-  "version": "0.1.0",
+  "version": "0.1.1",
   "homepage": "https://github.com/enki-com/react-search-input",
   "description": "Simple react.js component for a search input, providing a filter function.",
   "keywords": [
