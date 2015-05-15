@@ -26,7 +26,7 @@
         React.createElement("div", {className: "search-input " + this.props.className},
           React.createElement("div", {className: "search-wrapper"},
             React.createElement("span", {className: "search-icon"}, String.fromCharCode(9906)),
-            React.createElement("input", {type: "search", ref: "search", value: this.state.searchTerm,
+            React.createElement("input", {type: "search", value: this.state.searchTerm,
               onChange: this.updateSearch, className: "search-field",
               placeholder: "Search"})
           )
@@ -34,8 +34,8 @@
       );
     },
 
-    updateSearch: function() {
-      var searchTerm = this.refs.search.getDOMNode().value.toLowerCase();
+    updateSearch: function(e) {
+      var searchTerm = e.currentTarget.value.toLowerCase();
       this.setState({
         searchTerm: searchTerm
       }, function() {
