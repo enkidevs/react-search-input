@@ -35,7 +35,7 @@
     },
 
     updateSearch: function(e) {
-      var searchTerm = e.currentTarget.value.toLowerCase();
+      var searchTerm = e.target.value.toLowerCase();
       this.setState({
         searchTerm: searchTerm
       }, function() {
