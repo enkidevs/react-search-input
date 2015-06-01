@@ -82,11 +82,27 @@ Class of the Component (in addition of `search-input`).
 
 Function called when the search term is changed (will be passed as an argument).
 
+##### filterKeys
+
+Either an `[String]` or a `String`. Will be use by the `filter` method if no argument is passed there.
+
+##### throttle
+
+Reduce call frequency to the `onChange` function (in ms). Default is 200.
+
 ### Methods
 
 ##### filter([keys])
 
 Return a function which can be used to filter an array. `keys` can be `String`, `[String]` or `null`.
+
+If an array `keys` is an array, the function will return true if at least one of the keys of the item matches the serch term.
+
+### Static Methods
+
+##### filter(searchTerm, [keys])
+
+Return a function which can be used to filter an array. `searchTerm` can be a `regex` or a `String`. `keys` can be `String`, `[String]` or `null`.
 
 If an array `keys` is an array, the function will return true if at least one of the keys of the item matches the serch term.
 

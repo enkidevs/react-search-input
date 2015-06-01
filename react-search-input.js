@@ -39,46 +39,56 @@
       this.setState({
         searchTerm: searchTerm
       }, function() {
-        if (this.props.onChange) {
-          this.props.onChange(searchTerm);
+        if (this._throttleTimeout) {
+          clearTimeout(this._throttleTimeout);
         }
+        this._throttleTimeout = setTimeout(function() {
+          if (this.props.onChange) {
+            this.props.onChange(searchTerm);
+          }
+        }.bind(this), this.props.throttle);
       }.bind(this));
-
     },
 
     filter: function(keys) {
-      return function(item) {
-        var term = this.state.searchTerm;
-        if (term === '') {return true;}
-        // escape special symbols to ensure `term` is a valid regex
-        term = term.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
+      return Search.filter(this.state.searchTerm,
+                           keys || this.props.filterKeys);
+    },
 
-        var name = item;
+    statics: {
+      filter: function(term, keys) {
+        return function(item) {
+          if (term === '') {return true;}
+          // escape special symbols to ensure `term` is a valid regex
+          term = term.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
 
-        var _getNameForKey = function(_key, _name) {
-          var keys = _key.split('.');
-          keys.forEach(function(__key) {
-            _name = _name[__key];
-          });
+          var _getValueForKey = function(key, _item) {
+            var keys = key.split('.');
+            var result = _item;
+            keys.forEach(function(_key) {
+              result = result && result[_key];
+            });
 
-          return _name.toLowerCase();
-        };
+            return result && result.toLowerCase();
+          };
 
-        if (keys) {
-          if( typeof keys === 'string' ) {
-            keys = [keys];
-          }
-          for (var i = 0; i < keys.length; i++) {
-            if (_getNameForKey(keys[i], name).search(term) !== -1) {
-              return true;
+          if (keys) {
+            if( typeof keys === 'string' ) {
+              keys = [keys];
             }
+            for (var i = 0; i < keys.length; i++) {
+              var value = _getValueForKey(keys[i], item);
+              if (value && value.search(term) !== -1) {
+                return true;
+              }
+            }
+            return false;
+          } else {
+            var stringValue = item.toLowerCase();
+            return (stringValue.search(term) !== -1);
           }
-          return false;
-        } else {
-          name = name.toLowerCase();
-          return (name.search(term) !== -1);
-        }
-      }.bind(this);
+        }.bind(this);
+      }
     }
   });
 
