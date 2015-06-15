@@ -51,21 +51,57 @@
             job: 'Software Engineer',
             company: 'Enki'
           },
-          subject: 'Hi!'
+          subject: 'Hi!',
+          dest: [
+            {
+              name: 'Bruno',
+              job: 'CTO',
+              company: 'Enki'
+            },
+            {
+              name: 'Arseny',
+              job: 'Software Engineer',
+              company: 'Enki'
+            }
+          ]
         }, {
           user: {
             name: 'foo'
           },
-          subject: 'bar'
+          subject: 'bar',
+          dest: [
+            {
+              name: 'Bruno',
+              job: 'CTO',
+              company: 'Enki'
+            },
+            {
+              name: 'Arseny',
+              job: 'Software Engineer',
+              company: 'Enki'
+            }
+          ]
         }, {
           user: {
             name: 'bar'
           },
-          subject: 'foo'
+          subject: 'foo',
+          dest: [
+            {
+              name: 'Bruno',
+              job: 'CTO',
+              company: 'Enki'
+            },
+            {
+              name: 'Arseny',
+              job: 'Software Engineer',
+              company: 'Enki'
+            }
+          ]
         }];
 
         if (this.refs.search) {
-          var filters = ['user.name', 'subject'];
+          var filters = ['user.name', 'subject', 'dest.name'];
           mails = mails.filter(this.refs.search.filter(filters));
         }
 

@@ -62,14 +62,31 @@
           // escape special symbols to ensure `term` is a valid regex
           term = term.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
 
-          var _getValueForKey = function(key, _item) {
+          var _getValuesForKey = function(key, _item) {
             var keys = key.split('.');
-            var result = _item;
+            var results = [_item];
             keys.forEach(function(_key) {
-              result = result && result[_key];
+              var tmp = [];
+              results.forEach(function(result) {
+                if (result) {
+                  if(result instanceof Array) {
+                    result.forEach(function(res) {
+                      tmp.push(res[_key]);
+                    });
+                  } else {
+                    tmp.push(result[_key]);
+                  }
+                }
+              });
+              results = tmp;
             });
-
-            return result && result.toLowerCase();
+            return results.map(function(result) {
+              if (typeof result === 'string') {
+                return result.toLowerCase();
+              } else {
+                return null;
+              }
+            });
           };
 
           if (keys) {
@@ -77,15 +94,25 @@
               keys = [keys];
             }
             for (var i = 0; i < keys.length; i++) {
-              var value = _getValueForKey(keys[i], item);
-              if (value && value.search(term) !== -1) {
+              var values = _getValuesForKey(keys[i], item);
+              var found = false;
+              values.forEach(function(value) {
+                if (value && value.search(term) !== -1) {
+                  found = true;
+                }
+              });
+              if (found) {
                 return true;
               }
             }
             return false;
           } else {
-            var stringValue = item.toLowerCase();
-            return (stringValue.search(term) !== -1);
+            if( typeof item === 'string' ) {
+              var stringValue = item.toLowerCase();
+              return (stringValue.search(term) !== -1);
+            } else {
+              return false;
+            }
           }
         }.bind(this);
       }
