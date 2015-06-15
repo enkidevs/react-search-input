@@ -60,34 +60,7 @@
         return function(item) {
           if (term === '') {return true;}
           // escape special symbols to ensure `term` is a valid regex
-          term = term.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
-
-          var _getValuesForKey = function(key, _item) {
-            var keys = key.split('.');
-            var results = [_item];
-            keys.forEach(function(_key) {
-              var tmp = [];
-              results.forEach(function(result) {
-                if (result) {
-                  if(result instanceof Array) {
-                    result.forEach(function(res) {
-                      tmp.push(res[_key]);
-                    });
-                  } else {
-                    tmp.push(result[_key]);
-                  }
-                }
-              });
-              results = tmp;
-            });
-            return results.map(function(result) {
-              if (typeof result === 'string') {
-                return result.toLowerCase();
-              } else {
-                return null;
-              }
-            });
-          };
+          var escapedTerm = term.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
 
           if (keys) {
             if( typeof keys === 'string' ) {
@@ -97,8 +70,11 @@
               var values = _getValuesForKey(keys[i], item);
               var found = false;
               values.forEach(function(value) {
-                if (value && value.search(term) !== -1) {
-                  found = true;
+                try {
+                  if (value && value.search(term) !== -1) {
+                    found = true;
+                  }
+                } catch(e) {
                 }
               });
               if (found) {
@@ -107,10 +83,10 @@
             }
             return false;
           } else {
-            if( typeof item === 'string' ) {
+            try {
               var stringValue = item.toLowerCase();
               return (stringValue.search(term) !== -1);
-            } else {
+            } catch(e) {
               return false;
             }
           }
@@ -118,6 +94,33 @@
       }
     }
   });
+
+  var _getValuesForKey = function(key, _item) {
+    var keys = key.split('.');
+    var results = [_item];
+    keys.forEach(function(_key) {
+      var tmp = [];
+      results.forEach(function(result) {
+        if (result) {
+          if(result instanceof Array) {
+            result.forEach(function(res) {
+              tmp.push(res[_key]);
+            });
+          } else {
+            tmp.push(result[_key]);
+          }
+        }
+      });
+      results = tmp;
+    });
+    return results.map(function(result) {
+      if (typeof result === 'string') {
+        return result.toLowerCase();
+      } else {
+        return null;
+      }
+    });
+  };
 
   return Search;
 });
