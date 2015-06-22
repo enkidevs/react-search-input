@@ -35,7 +35,7 @@
     },
 
     updateSearch: function(e) {
-      var searchTerm = e.target.value.toLowerCase();
+      var searchTerm = e.target.value;
       this.setState({
         searchTerm: searchTerm
       }, function() {
@@ -60,7 +60,8 @@
         return function(item) {
           if (term === '') {return true;}
           // escape special symbols to ensure `term` is a valid regex
-          var escapedTerm = term.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
+          //var escapedTerm = term.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
+          term = term.toLowerCase();
 
           if (keys) {
             if( typeof keys === 'string' ) {
