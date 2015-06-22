@@ -12,7 +12,23 @@
   var Search = React.createClass({
     propTypes: {
       className: React.PropTypes.string,
-      onChange: React.PropTypes.func
+      onChange: React.PropTypes.func,
+      caseSensitive: React.PropTypes.bool,
+      throttle: React.PropTypes.number,
+      filterKeys: React.PropTypes.oneOf([
+        React.PropTypes.string,
+        React.PropTypes.arrayOf(React.PropTypes.string)
+      ])
+
+    },
+
+    getDefaultProps: function() {
+      return {
+        className: '',
+        onChange: function() {},
+        caseSensitive: false,
+        throttle: 200
+      }
     },
 
     getInitialState: function() {
@@ -42,26 +58,25 @@
         if (this._throttleTimeout) {
           clearTimeout(this._throttleTimeout);
         }
-        this._throttleTimeout = setTimeout(function() {
-          if (this.props.onChange) {
-            this.props.onChange(searchTerm);
-          }
-        }.bind(this), this.props.throttle);
+        this._throttleTimeout = setTimeout(this.props.onChange, this.props.throttle, searchTerm);
       }.bind(this));
     },
 
     filter: function(keys) {
       return Search.filter(this.state.searchTerm,
-                           keys || this.props.filterKeys);
+                    keys || this.props.filterKeys, this.props.caseSensitive);
     },
 
     statics: {
-      filter: function(term, keys) {
+      filter: function(term, keys, caseSensitive) {
         return function(item) {
           if (term === '') {return true;}
           // escape special symbols to ensure `term` is a valid regex
           //var escapedTerm = term.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
-          term = term.toLowerCase();
+
+          if (!caseSensitive) {
+            term = term.toLowerCase();
+          }
 
           if (keys) {
             if( typeof keys === 'string' ) {

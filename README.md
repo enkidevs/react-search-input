@@ -88,7 +88,11 @@ Either an `[String]` or a `String`. Will be use by the `filter` method if no arg
 
 ##### throttle
 
-Reduce call frequency to the `onChange` function (in ms). Default is 200.
+Reduce call frequency to the `onChange` function (in ms). Default is `200`.
+
+##### caseSensitive
+
+Define if the search should be case sensitive. Default is `false`
 
 ### Methods
 
@@ -100,7 +104,7 @@ If an array `keys` is an array, the function will return true if at least one of
 
 ### Static Methods
 
-##### filter(searchTerm, [keys])
+##### filter(searchTerm, [keys], [caseSensitive])
 
 Return a function which can be used to filter an array. `searchTerm` can be a `regex` or a `String`. `keys` can be `String`, `[String]` or `null`.
 
