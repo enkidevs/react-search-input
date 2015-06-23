@@ -78,35 +78,42 @@
             term = term.toLowerCase();
           }
 
-          if (keys) {
-            if( typeof keys === 'string' ) {
-              keys = [keys];
-            }
-            for (var i = 0; i < keys.length; i++) {
-              var values = _getValuesForKey(keys[i], item);
-              var found = false;
-              values.forEach(function(value) {
-                try {
-                  if (value && value.search(term) !== -1) {
-                    found = true;
-                  }
-                } catch(e) {
-                }
-              });
-              if (found) {
-                return true;
+          var terms = term.split(' ');
+          var foundCount = 0;
+          terms.forEach(function(term) {
+            if (keys) {
+              if (typeof keys === 'string') {
+                keys = [keys];
               }
+              var found = false;
+              for (var i = 0; i < keys.length; i++) {
+                var values = _getValuesForKey(keys[i], item);
+                values.forEach(function(value) {
+                  try {
+                    if (value && value.search(term) !== -1) {
+                      found = true;
+                    }
+                  } catch(e) {}
+                });
+                if (found) {
+                  break;
+                }
+              }
+
+              if (found) {
+                foundCount++;
+              }
+            } else {
+              try {
+                var stringValue = item.toLowerCase();
+                if (stringValue.search(term) !== -1) {
+                  foundCount++;
+                }
+              } catch(e) {}
             }
-            return false;
-          } else {
-            try {
-              var stringValue = item.toLowerCase();
-              return (stringValue.search(term) !== -1);
-            } catch(e) {
-              return false;
-            }
-          }
-        }.bind(this);
+          });
+          return foundCount === terms.length;;
+        };
       }
     }
   });
