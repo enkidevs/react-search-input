@@ -100,7 +100,7 @@
 
               var found = false;
               for (var i = 0; i < currentKeys.length; i++) {
-                var values = _getValuesForKey(keys[i], item);
+                var values = _getValuesForKey(currentKeys[i], item);
                 values.forEach(function(value) {
                   try {
                     if (value && value.search(term) !== -1) {
