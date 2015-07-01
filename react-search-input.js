@@ -1,13 +1,13 @@
-;(function (root, factory) {
-  if (typeof module !== "undefined" && module.exports) {
-    module.exports = factory(require("react"));
-  } else if (typeof define === "function" && define.amd) {
-    define(["react"], factory);
+;(function(root, factory) {
+  if (typeof module !== 'undefined' && module.exports) {
+    module.exports = factory(require('react'));
+  } else if (typeof define === 'function' && define.amd) {
+    define(['react'], factory);
   } else {
     root.SearchInput = factory(root.React);
   }
 })(this, function (React) {
-  "use strict";
+  'use strict';
 
   var Search = React.createClass({
     propTypes: {
@@ -28,7 +28,7 @@
         onChange: function() {},
         caseSensitive: false,
         throttle: 200
-      }
+      };
     },
 
     getInitialState: function() {
@@ -39,12 +39,12 @@
 
     render: function() {
       return (
-        React.createElement("div", {className: "search-input " + this.props.className},
-          React.createElement("div", {className: "search-wrapper"},
-            React.createElement("span", {className: "search-icon"}, String.fromCharCode(9906)),
-            React.createElement("input", {type: "search", value: this.state.searchTerm,
-              onChange: this.updateSearch, className: "search-field",
-              placeholder: "Search"})
+        React.createElement('div', {className: 'search-input ' + this.props.className},
+          React.createElement('div', {className: 'search-wrapper'},
+            React.createElement('span', {className: 'search-icon'}, String.fromCharCode(9906)),
+            React.createElement('input', {type: 'search', value: this.state.searchTerm,
+              onChange: this.updateSearch, className: 'search-field',
+              placeholder: 'Search'})
           )
         )
       );
@@ -58,6 +58,7 @@
         if (this._throttleTimeout) {
           clearTimeout(this._throttleTimeout);
         }
+
         this._throttleTimeout = setTimeout(this.props.onChange, this.props.throttle, searchTerm);
       }.bind(this));
     },
@@ -71,8 +72,6 @@
       filter: function(term, keys, caseSensitive) {
         return function(item) {
           if (term === '') {return true;}
-          // escape special symbols to ensure `term` is a valid regex
-          //var escapedTerm = term.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
 
           if (!caseSensitive) {
             term = term.toLowerCase();
@@ -80,21 +79,36 @@
 
           var terms = term.split(' ');
           var foundCount = 0;
-          terms.forEach(function(term) {
-            if (keys) {
-              if (typeof keys === 'string') {
-                keys = [keys];
+          if (keys) {
+            if (typeof keys === 'string') {
+              keys = [keys];
+            }
+
+            terms.forEach(function(term) {
+
+              // allow search in specific fields with the syntax `field:search`
+              var currentKeys;
+              if (term.indexOf(':') > -1) {
+                var searchedField = term.split(':')[0];
+                term = term.split(':')[1];
+                currentKeys = keys.filter(function(key) {
+                  return key.indexOf(searchedField) > -1;
+                });
+              } else {
+                currentKeys = keys;
               }
+
               var found = false;
-              for (var i = 0; i < keys.length; i++) {
+              for (var i = 0; i < currentKeys.length; i++) {
                 var values = _getValuesForKey(keys[i], item);
                 values.forEach(function(value) {
                   try {
                     if (value && value.search(term) !== -1) {
                       found = true;
                     }
-                  } catch(e) {}
+                  } catch (e) {}
                 });
+
                 if (found) {
                   break;
                 }
@@ -103,16 +117,19 @@
               if (found) {
                 foundCount++;
               }
-            } else {
+            });
+          } else {
+            terms.forEach(function(term) {
               try {
                 var stringValue = item.toLowerCase();
                 if (stringValue.search(term) !== -1) {
                   foundCount++;
                 }
-              } catch(e) {}
-            }
-          });
-          return foundCount === terms.length;;
+              } catch (e) {}
+            });
+          }
+
+          return foundCount === terms.length;
         };
       }
     }
@@ -125,7 +142,7 @@
       var tmp = [];
       results.forEach(function(result) {
         if (result) {
-          if(result instanceof Array) {
+          if (result instanceof Array) {
             result.forEach(function(res) {
               tmp.push(res[_key]);
             });
@@ -134,8 +151,10 @@
           }
         }
       });
+
       results = tmp;
     });
+
     return results.map(function(result) {
       if (typeof result === 'string') {
         return result.toLowerCase();
