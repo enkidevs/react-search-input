@@ -18,8 +18,9 @@
       filterKeys: React.PropTypes.oneOf([
         React.PropTypes.string,
         React.PropTypes.arrayOf(React.PropTypes.string)
-      ])
-
+      ]),
+      placeholder: React.PropTypes.string,
+      value: React.PropTypes.string
     },
 
     getDefaultProps: function() {
@@ -27,14 +28,26 @@
         className: '',
         onChange: function() {},
         caseSensitive: false,
-        throttle: 200
+        throttle: 200,
+        placeholder: 'Search'
       };
     },
 
     getInitialState: function() {
       return {
-        searchTerm: ''
+        searchTerm: this.props.value || ''
       };
+    },
+
+    componentWillReceiveProps: function(nextProps) {
+      if (nextProps.value && nextProps.value !== this.props.value) {
+        var e = {
+          target: {
+            value: nextProps.value
+          }
+        };
+        this.updateSearch(e);
+      }
     },
 
     render: function() {
@@ -44,7 +57,7 @@
             React.createElement('span', {className: 'search-icon'}, String.fromCharCode(9906)),
             React.createElement('input', {type: 'search', value: this.state.searchTerm,
               onChange: this.updateSearch, className: 'search-field',
-              placeholder: 'Search'})
+              placeholder: this.props.placeholder})
           )
         )
       );

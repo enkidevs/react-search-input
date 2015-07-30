@@ -46,7 +46,7 @@ var App = React.createClass({
       var filters = ['user.name', 'subject'];
       mails = mails.filter(this.refs.search.filter(filters));
     }
-    
+
     return (
       <div>
         <SearchInput ref='search' onChange={this.searchUpdated} />
@@ -61,7 +61,7 @@ var App = React.createClass({
       </div>
     );
   },
-  
+
   searchUpdated(term) {
     this.setState({searchTerm: term}); // needed to force re-render
   }
@@ -94,6 +94,14 @@ Reduce call frequency to the `onChange` function (in ms). Default is `200`.
 
 Define if the search should be case sensitive. Default is `false`
 
+##### placeholder
+
+Define the placeholder of the input. Default is `Search`.
+
+##### value
+
+Define the value of the input.
+
 ### Methods
 
 ##### filter([keys])
@@ -117,6 +125,3 @@ Look at [react-search-input.css](https://github.com/mathieudutour/react-search-i
 ---
 
 MIT Licensed
-
-
-
