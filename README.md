@@ -78,6 +78,11 @@ All props are optional.
 
 Class of the Component (in addition of `search-input`).
 
+##### inputType
+
+The  type (e.g. "text" or "search") of the underlying `<input>` element.
+Default is "search" but you may want to use "text" to prevent browser-specific defaults that are hard to correct with CSS (e.g. round corners on iOS Safari).
+
 ##### onChange
 
 Function called when the search term is changed (will be passed as an argument).

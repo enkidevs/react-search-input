@@ -12,6 +12,7 @@
   var Search = React.createClass({
     propTypes: {
       className: React.PropTypes.string,
+      inputType: React.PropTypes.string,
       onChange: React.PropTypes.func,
       caseSensitive: React.PropTypes.bool,
       throttle: React.PropTypes.number,
@@ -55,7 +56,8 @@
         React.createElement('div', {className: 'search-input ' + this.props.className},
           React.createElement('div', {className: 'search-wrapper'},
             React.createElement('span', {className: 'search-icon'}, String.fromCharCode(9906)),
-            React.createElement('input', {type: 'search', value: this.state.searchTerm,
+            React.createElement('input', {type: this.props.inputType || 'search',
+              value: this.state.searchTerm,
               onChange: this.updateSearch, className: 'search-field',
               placeholder: this.props.placeholder})
           )
