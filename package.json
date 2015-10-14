@@ -1,6 +1,6 @@
 {
   "name": "react-search-input",
-  "version": "0.2.8",
+  "version": "0.3.0",
   "description": "Simple react.js component for a search input, providing a filter function.",
   "main": "react-search-input.js",
   "dependencies": {
