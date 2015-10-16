@@ -9,10 +9,11 @@
 })(this, function (React) {
   'use strict';
 
+  function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
   var Search = React.createClass({
     propTypes: {
       className: React.PropTypes.string,
-      inputType: React.PropTypes.string,
       onChange: React.PropTypes.func,
       caseSensitive: React.PropTypes.bool,
       throttle: React.PropTypes.number,
@@ -20,7 +21,6 @@
         React.PropTypes.string,
         React.PropTypes.arrayOf(React.PropTypes.string)
       ]),
-      placeholder: React.PropTypes.string,
       value: React.PropTypes.string
     },
 
@@ -29,8 +29,7 @@
         className: '',
         onChange: function() {},
         caseSensitive: false,
-        throttle: 200,
-        placeholder: 'Search'
+        throttle: 200
       };
     },
 
@@ -52,14 +51,17 @@
     },
 
     render: function() {
+      var inputProps = _objectWithoutProperties(this.props, ["className", "onChange", "caseSensitive", "throttle", "filterKeys", "value", "onError"]);
+      inputProps.type = inputProps.type || 'search';
+      inputProps.value = this.state.searchTerm;
+      inputProps.onChange = this.updateSearch
+      inputProps.placeholder = inputProps.placeholder || 'Search';
+      inputProps.className = 'search-field';
       return (
         React.createElement('div', {className: 'search-input ' + this.props.className},
           React.createElement('div', {className: 'search-wrapper'},
             React.createElement('span', {className: 'search-icon'}, String.fromCharCode(9906)),
-            React.createElement('input', {type: this.props.inputType || 'search',
-              value: this.state.searchTerm,
-              onChange: this.updateSearch, className: 'search-field',
-              placeholder: this.props.placeholder})
+            React.createElement('input', inputProps)
           )
         )
       );
