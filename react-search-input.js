@@ -21,7 +21,8 @@
         React.PropTypes.arrayOf(React.PropTypes.string)
       ]),
       placeholder: React.PropTypes.string,
-      value: React.PropTypes.string
+      value: React.PropTypes.string,
+      name: React.PropTypes.string
     },
 
     getDefaultProps: function() {
@@ -30,7 +31,8 @@
         onChange: function() {},
         caseSensitive: false,
         throttle: 200,
-        placeholder: 'Search'
+        placeholder: 'Search',
+        name: 'search'
       };
     },
 
@@ -59,6 +61,7 @@
             React.createElement('input', {type: this.props.inputType || 'search',
               value: this.state.searchTerm,
               onChange: this.updateSearch, className: 'search-field',
+              name: this.props.name,
               placeholder: this.props.placeholder})
           )
         )
