@@ -49,7 +49,7 @@ var App = React.createClass({
 
     return (
       <div>
-        <SearchInput ref='search' onChange={this.searchUpdated} />
+        <SearchInput name='search' ref='search' onChange={this.searchUpdated} />
         {mails.map(function(mail) {
           return (
             <div className='mail'>
@@ -106,6 +106,10 @@ Define the placeholder of the input. Default is `Search`.
 ##### value
 
 Define the value of the input.
+
+##### name
+
+Define the name attribute of the input.
 
 ### Methods
 
