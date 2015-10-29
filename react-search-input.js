@@ -16,6 +16,7 @@
       className: React.PropTypes.string,
       onChange: React.PropTypes.func,
       caseSensitive: React.PropTypes.bool,
+      defaultStyle: React.PropTypes.bool,
       throttle: React.PropTypes.number,
       filterKeys: React.PropTypes.oneOf([
         React.PropTypes.string,
@@ -29,6 +30,7 @@
         className: '',
         onChange: function() {},
         caseSensitive: false,
+        defaultStyle: true,
         throttle: 200
       };
     },
@@ -51,20 +53,28 @@
     },
 
     render: function() {
+    	var generatedElements;
       var inputProps = _objectWithoutProperties(this.props, ["className", "onChange", "caseSensitive", "throttle", "filterKeys", "value", "onError"]);
       inputProps.type = inputProps.type || 'search';
       inputProps.value = this.state.searchTerm;
       inputProps.onChange = this.updateSearch
       inputProps.placeholder = inputProps.placeholder || 'Search';
-      inputProps.className = 'search-field';
-      return (
-        React.createElement('div', {className: 'search-input ' + this.props.className},
-          React.createElement('div', {className: 'search-wrapper'},
-            React.createElement('span', {className: 'search-icon'}, String.fromCharCode(9906)),
-            React.createElement('input', inputProps)
-          )
-        )
-      );
+      
+    	if (this.props.defaultStyle) {
+    		inputProps.className = 'search-field';
+    		generatedElements = React.createElement('div', {className: 'search-input ' + this.props.className},
+	          React.createElement('div', {className: 'search-wrapper'},
+	            React.createElement('span', {className: 'search-icon'}, String.fromCharCode(9906)),
+	            React.createElement('input', inputProps)
+	          )
+	        );
+    	}else {
+    		inputProps.className = this.props.className || 'search-field';
+    		generatedElements =  React.createElement('input', inputProps);
+    	}
+    	return (
+    		generatedElements
+	    );
     },
 
     updateSearch: function(e) {
