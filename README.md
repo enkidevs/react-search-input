@@ -72,16 +72,11 @@ var App = React.createClass({
 
 ### Props
 
-All props are optional.
+All props are optional. All other props will be passed to the DOM input.
 
 ##### className
 
 Class of the Component (in addition of `search-input`).
-
-##### inputType
-
-The  type (e.g. "text" or "search") of the underlying `<input>` element.
-Default is "search" but you may want to use "text" to prevent browser-specific defaults that are hard to correct with CSS (e.g. round corners on iOS Safari).
 
 ##### onChange
 
@@ -98,10 +93,6 @@ Reduce call frequency to the `onChange` function (in ms). Default is `200`.
 ##### caseSensitive
 
 Define if the search should be case sensitive. Default is `false`
-
-##### placeholder
-
-Define the placeholder of the input. Default is `Search`.
 
 ##### value
 
