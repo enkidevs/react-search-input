@@ -51,18 +51,14 @@
     },
 
     render: function() {
-      var inputProps = _objectWithoutProperties(this.props, ["className", "onChange", "caseSensitive", "throttle", "filterKeys", "value", "onError"]);
+      var inputProps = _objectWithoutProperties(this.props, ['className', 'onChange', 'caseSensitive', 'throttle', 'filterKeys', 'value']);
       inputProps.type = inputProps.type || 'search';
       inputProps.value = this.state.searchTerm;
       inputProps.onChange = this.updateSearch
       inputProps.placeholder = inputProps.placeholder || 'Search';
-      inputProps.className = 'search-field';
       return (
-        React.createElement('div', {className: 'search-input ' + this.props.className},
-          React.createElement('div', {className: 'search-wrapper'},
-            React.createElement('span', {className: 'search-icon'}, String.fromCharCode(9906)),
-            React.createElement('input', inputProps)
-          )
+        React.createElement('div', {className: this.props.className || ''},
+          React.createElement('input', inputProps)
         )
       );
     },

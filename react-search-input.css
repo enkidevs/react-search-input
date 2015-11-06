@@ -1,13 +1,11 @@
 .search-input {
   padding: 10px 10px;
   height: 52px;
-}
-
-.search-input .search-wrapper {
   position: relative;
 }
 
-.search-input .search-icon {
+.search-input::before {
+  content: "\26b2";
   display: block;
   position: absolute;
   width: 15px;
@@ -15,12 +13,12 @@
   height: 15px;
   transform: rotate(-45deg);
   font-size: 20px;
-  top: 2px;
-  left: 0;
+  top: 11px;
+  left: 13px;
   line-height: 32px;
 }
 
-.search-input .search-field {
+.search-input > input {
   width: 100%;
   font-size: 18px;
   border: none;
@@ -30,6 +28,6 @@
   position: relative;
 }
 
-.search-input .search-field:focus {
+.search-input > input:focus {
   outline: none;
 }

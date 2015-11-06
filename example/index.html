@@ -107,10 +107,14 @@
 
         return (
           React.createElement("div", null,
-            React.createElement(SearchInput, {ref: "search", onChange: this.searchUpdated}),
-              mails.map(function(mail) {
+            React.createElement(SearchInput, {
+                ref: "search",
+                onChange: this.searchUpdated,
+                className: 'search-input'
+              }),
+              mails.map(function(mail, i) {
                 return (
-                  React.createElement("div", {className: "mail"},
+                  React.createElement("div", {className: "mail", key: 'mail' + i},
                     React.createElement("div", {className: "from"}, mail.user.name),
                     React.createElement("div", {className: "subject"}, mail.subject)
                   )
