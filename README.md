@@ -14,62 +14,43 @@
 npm install react-search-input --save
 ```
 
-or
-
-```bash
-bower install react-search-input --save
-```
-
 ## Example
 
 ```javascript
-var SearchInput = require('react-search-input');
+import SearchInput, {createFilter} from 'react-search-input'
 
-var App = React.createClass({
-  render() {
-    var mails = [{
-      user: {
-        name: 'Mathieu',
-        job: 'Software Engineer',
-        company: 'Enki'
-      },
-      subject: 'Hi!'
-    }, {
-      user: {
-        name: 'foo'
-      },
-      subject: 'bar'
-    }, {
-      user: {
-        name: 'bar'
-      },
-      subject: 'foo'
-    }];
+import emails from './mails'
 
-    if (this.refs.search) {
-      var filters = ['user.name', 'subject'];
-      mails = mails.filter(this.refs.search.filter(filters));
-    }
+const KEYS_TO_FILTERS = ['user.name', 'subject', 'dest.name']
+
+const App = React.createClass({
+  getInitialState () {
+    return { searchTerm: '' }
+  },
+
+  render () {
+    const filteredEmails = emails.filter(createFilter(this.state.searchTerm, KEYS_TO_FILTERS))
 
     return (
       <div>
-        <SearchInput ref='search' onChange={this.searchUpdated} />
-        {mails.map(function(mail) {
+        <SearchInput className="search-input" onChange={this.searchUpdated} />
+        {filteredEmails.map(email => {
           return (
-            <div className='mail'>
-              <div className='from'>{mail.user.name}</div>
-              <div className='subject'>{mail.subject}</div>
+            <div className="mail" key={email.id}>
+              <div className="from">{email.user.name}</div>
+              <div className="subject">{email.subject}</div>
             </div>
           )
         })}
       </div>
-    );
+    )
   },
 
-  searchUpdated(term) {
-    this.setState({searchTerm: term}); // needed to force re-render
+  searchUpdated (term) {
+    this.setState({searchTerm: term})
   }
-});
+})
+
 ```
 
 ## API
@@ -97,6 +78,10 @@ Reduce call frequency to the `onChange` function (in ms). Default is `200`.
 ##### caseSensitive
 
 Define if the search should be case sensitive. Default is `false`
+
+##### fuzzy
+
+Define if the search should be fuzzy. Default is `false`
 
 ##### value
 
