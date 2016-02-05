@@ -37,7 +37,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/enki-com/react-search-input"
+    "url": "https://github.com/enkidevs/react-search-input"
   },
   "keywords": [
     "react",
@@ -51,9 +51,9 @@
   "author": "Mathieu Dutour",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/enki-com/react-search-input/issues"
+    "url": "https://github.com/enkidevs/react-search-input/issues"
   },
-  "homepage": "https://github.com/enki-com/react-search-input",
+  "homepage": "https://github.com/enkidevs/react-search-input",
   "dependencies": {
     "fuse.js": "2.0.0"
   }
