@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-  <title>react-search-input example (without JSX)</title>
+  <title>react-search-input example</title>
   <link rel="stylesheet" href="../react-search-input.css">
   <style>
     * {
@@ -38,98 +38,6 @@
 
   <div id="app"></div>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.0/react.js"></script>
-  <script src="../react-search-input.js"></script>
-  <script>
-    var App = React.createClass({
-      displayName: "App",
-
-      render() {
-        var mails = [{
-          user: {
-            name: 'Mathieu',
-            job: 'Software Engineer',
-            company: 'Enki'
-          },
-          subject: 'Hi!',
-          dest: [
-            {
-              name: 'Bruno',
-              job: 'CTO',
-              company: 'Enki'
-            },
-            {
-              name: 'Arseny',
-              job: 'Software Engineer',
-              company: 'Enki'
-            }
-          ]
-        }, {
-          user: {
-            name: 'Bruno'
-          },
-          subject: 'javascript',
-          dest: [
-            {
-              name: 'Mathieu',
-              job: 'CTO',
-              company: 'Enki'
-            },
-            {
-              name: 'Arseny',
-              job: 'Software Engineer',
-              company: 'Enki'
-            }
-          ]
-        }, {
-          user: {
-            name: 'you can search for me using a regex : `java$`'
-          },
-          subject: 'java',
-          dest: [
-            {
-              name: 'Bruno',
-              job: 'CTO',
-              company: 'Enki'
-            },
-            {
-              name: 'Arseny',
-              job: 'Software Engineer',
-              company: 'Enki'
-            }
-          ]
-        }];
-
-        if (this.refs.search) {
-          var filters = ['user.name', 'subject', 'dest.name'];
-          mails = mails.filter(this.refs.search.filter(filters));
-        }
-
-        return (
-          React.createElement("div", null,
-            React.createElement(SearchInput, {
-                ref: "search",
-                onChange: this.searchUpdated,
-                className: 'search-input'
-              }),
-              mails.map(function(mail, i) {
-                return (
-                  React.createElement("div", {className: "mail", key: 'mail' + i},
-                    React.createElement("div", {className: "from"}, mail.user.name),
-                    React.createElement("div", {className: "subject"}, mail.subject)
-                  )
-                );
-              })
-          )
-        );
-      },
-
-      searchUpdated(term) {
-        this.setState({searchTerm: term}); // needed to force re-render
-      }
-    });
-
-    React.render(React.createElement(App, null), document.getElementById("app"));
-  </script>
+  <script src="./app.bundle.js"></script>
 </body>
 </html>

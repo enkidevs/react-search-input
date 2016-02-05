@@ -1,4 +1,8 @@
 # react-search-input
+[![build status](https://img.shields.io/travis/enkidevs/react-search-input/master.svg?style=flat-square)](https://travis-ci.org/enkidevs/react-search-input)
+[![npm version](https://img.shields.io/npm/v/react-search-input.svg?style=flat-square)](https://www.npmjs.com/package/react-search-input)
+[![Dependency Status](https://david-dm.org/enkidevs/react-search-input.svg)](https://david-dm.org/enkidevs/react-search-input)
+[![devDependency Status](https://david-dm.org/enkidevs/react-search-input/dev-status.svg)](https://david-dm.org/enkidevs/react-search-input#info=devDependencies)
 
 > Simple [React](http://facebook.github.io/react/index.html) component for a search input, providing a filter function.
 
