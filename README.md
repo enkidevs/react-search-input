@@ -6,7 +6,7 @@
 
 > Simple [React](http://facebook.github.io/react/index.html) component for a search input, providing a filter function.
 
-### [Demo](https://enki-com.github.io/react-search-input)
+### [Demo](https://enkidevs.github.io/react-search-input)
 
 ## Install
 
@@ -120,7 +120,7 @@ If an array `keys` is an array, the function will return true if at least one of
 
 ## Styles
 
-Look at [react-search-input.css](https://github.com/mathieudutour/react-search-input/blob/master/react-search-input.css) for an idea on how to style this component.
+Look at [react-search-input.css](react-search-input.css) for an idea on how to style this component.
 
 ---
 
