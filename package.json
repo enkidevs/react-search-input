@@ -8,9 +8,6 @@
     "lib",
     "src"
   ],
-  "peerDependencies": {
-    "react": "0.x"
-  },
   "devDependencies": {
     "babel": "^6.5.1",
     "babel-cli": "^6.5.1",
