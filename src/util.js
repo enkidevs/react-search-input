@@ -20,10 +20,11 @@ export function getValuesForKey (key, item) {
     results = tmp
   })
 
-  return results.filter(r => typeof r === 'string')
+  return results.filter(r => typeof r === 'string' || typeof r === 'number')
 }
 
 export function searchStrings (strings, term, caseSensitive, fuzzy) {
+  strings = strings.map(e => e.toString());
   try {
     if (fuzzy) {
       const fuse = new Fuse(strings.map(s => { return {id: s} }), { keys: ['id'], id: 'id', caseSensitive })
