@@ -5,7 +5,7 @@ import SearchInput, {createFilter} from '../../lib/index'
 
 import emails from './mails'
 
-const KEYS_TO_FILTERS = ['user.name', 'subject', 'dest.name']
+const KEYS_TO_FILTERS = ['user.name', 'subject', 'dest.name', 'id']
 
 const App = React.createClass({
   getInitialState () {
