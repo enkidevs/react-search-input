@@ -69,7 +69,7 @@ export function createFilter (term, keys, caseSensitive, fuzzy) {
         if (term.indexOf(':') > -1) {
           const searchedField = term.split(':')[0]
           term = term.split(':')[1]
-          currentKeys = keys.filter(key => key.indexOf(searchedField) > -1)
+          currentKeys = keys.filter(key => key.toLowerCase().indexOf(searchedField) > -1)
         } else {
           currentKeys = keys
         }
