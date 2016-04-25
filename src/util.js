@@ -24,7 +24,7 @@ export function getValuesForKey (key, item) {
 }
 
 export function searchStrings (strings, term, caseSensitive, fuzzy) {
-  strings = strings.map(e => e.toString());
+  strings = strings.map(e => e.toString())
   try {
     if (fuzzy) {
       const fuse = new Fuse(strings.map(s => { return {id: s} }), { keys: ['id'], id: 'id', caseSensitive })
@@ -58,29 +58,29 @@ export function createFilter (term, keys, caseSensitive, fuzzy) {
 
     const terms = term.split(' ')
 
+    if (!keys) {
+      return terms.every(term => searchStrings([item], term, caseSensitive, fuzzy))
+    }
+
+    if (typeof keys === 'string') {
+      keys = [keys]
+    }
+
     return terms.every(term => {
-      if (keys) {
-        if (typeof keys === 'string') {
-          keys = [keys]
-        }
-
-        // allow search in specific fields with the syntax `field:search`
-        let currentKeys
-        if (term.indexOf(':') > -1) {
-          const searchedField = term.split(':')[0]
-          term = term.split(':')[1]
-          currentKeys = keys.filter(key => key.toLowerCase().indexOf(searchedField) > -1)
-        } else {
-          currentKeys = keys
-        }
-
-        return currentKeys.find(key => {
-          const values = getValuesForKey(key, item)
-          return searchStrings(values, term, caseSensitive, fuzzy)
-        })
+      // allow search in specific fields with the syntax `field:search`
+      let currentKeys
+      if (term.indexOf(':') > -1) {
+        const searchedField = term.split(':')[0]
+        term = term.split(':')[1]
+        currentKeys = keys.filter(key => key.toLowerCase().indexOf(searchedField) > -1)
       } else {
-        return searchStrings([item], term, caseSensitive, fuzzy)
+        currentKeys = keys
       }
+
+      return currentKeys.find(key => {
+        const values = getValuesForKey(key, item)
+        return searchStrings(values, term, caseSensitive, fuzzy)
+      })
     })
   }
 }

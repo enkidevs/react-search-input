@@ -1,6 +1,6 @@
 {
   "name": "react-search-input",
-  "version": "0.8.0",
+  "version": "0.8.1",
   "description": "Simple react.js component for a search input, providing a filter function.",
   "main": "lib/index.js",
   "jsnext:main": "src/index.js",
