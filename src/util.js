@@ -1,4 +1,5 @@
 import Fuse from 'fuse.js'
+import {Iterable} from 'immutable'
 
 export function getValuesForKey (key, item) {
   const keys = key.split('.')
@@ -11,6 +12,8 @@ export function getValuesForKey (key, item) {
           result.forEach(res => {
             tmp.push(res[_key])
           })
+        } else if (Iterable.isIterable(result)) {
+          tmp.push(result.get(_key))
         } else {
           tmp.push(result[_key])
         }
@@ -25,8 +28,12 @@ export function getValuesForKey (key, item) {
 
 export function searchStrings (strings, term, caseSensitive, fuzzy) {
   strings = strings.map(e => e.toString())
+
   try {
     if (fuzzy) {
+      if (Iterable.isIterable(strings)) {
+        strings = strings.toJS()
+      }
       const fuse = new Fuse(strings.map(s => { return {id: s} }), { keys: ['id'], id: 'id', caseSensitive })
       return fuse.search(term).length
     }
