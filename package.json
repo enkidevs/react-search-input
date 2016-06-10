@@ -53,6 +53,7 @@
   },
   "homepage": "https://github.com/enkidevs/react-search-input",
   "dependencies": {
-    "fuse.js": "2.2.0"
+    "fuse.js": "2.2.0",
+    "immutable": "^3.8.1"
   }
 }
