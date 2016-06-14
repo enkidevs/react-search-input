@@ -1,6 +1,6 @@
 {
   "name": "react-search-input",
-  "version": "0.8.1",
+  "version": "0.9.0",
   "description": "Simple react.js component for a search input, providing a filter function.",
   "main": "lib/index.js",
   "jsnext:main": "src/index.js",
@@ -53,6 +53,6 @@
   },
   "homepage": "https://github.com/enkidevs/react-search-input",
   "dependencies": {
-    "fuse.js": "2.2.0"
+    "fuse.js": "^2.2.0"
   }
 }

@@ -11,7 +11,7 @@ export function getValuesForKey (key, item) {
           result.forEach(res => {
             tmp.push(res[_key])
           })
-        } else if (result.get instanceof Function) {
+        } else if (result && typeof result.get === 'function') {
           tmp.push(result.get(_key))
         } else {
           tmp.push(result[_key])
@@ -30,7 +30,7 @@ export function searchStrings (strings, term, caseSensitive, fuzzy) {
 
   try {
     if (fuzzy) {
-      if (strings.toJS) {
+      if (typeof strings.toJS === 'function') {
         strings = strings.toJS()
       }
       const fuse = new Fuse(strings.map(s => { return {id: s} }), { keys: ['id'], id: 'id', caseSensitive })
