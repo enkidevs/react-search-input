@@ -8,8 +8,12 @@ export function getValuesForKey (key, item) {
     results.forEach(result => {
       if (result) {
         if (result instanceof Array) {
+          const index = parseInt(_key, 10);
+          if (!isNaN(index)) {
+            return tmp.push(result[index])
+          }
           result.forEach(res => {
-            tmp.push(res)
+            tmp.push(res[_key])
           })
         } else if (result && typeof result.get === 'function') {
           tmp.push(result.get(_key))
