@@ -8,7 +8,7 @@ export function getValuesForKey (key, item) {
     results.forEach(result => {
       if (result) {
         if (result instanceof Array) {
-          const index = parseInt(_key, 10);
+          const index = parseInt(_key, 10)
           if (!isNaN(index)) {
             return tmp.push(result[index])
           }
