@@ -9,7 +9,7 @@ export function getValuesForKey (key, item) {
       if (result) {
         if (result instanceof Array) {
           result.forEach(res => {
-            tmp.push(res[_key])
+            tmp.push(res)
           })
         } else if (result && typeof result.get === 'function') {
           tmp.push(result.get(_key))
