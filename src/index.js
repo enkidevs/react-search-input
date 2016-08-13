@@ -4,6 +4,7 @@ import { createFilter } from './util'
 const Search = React.createClass({
   propTypes: {
     className: React.PropTypes.string,
+    inputClassName: React.PropTypes.string,
     onChange: React.PropTypes.func,
     caseSensitive: React.PropTypes.bool,
     fuzzy: React.PropTypes.bool,
@@ -43,10 +44,11 @@ const Search = React.createClass({
   },
 
   render () {
-    const {className, onChange, caseSensitive, throttle, filterKeys, value, fuzzy, ...inputProps} = this.props
+    const {className, onChange, caseSensitive, throttle, filterKeys, value, fuzzy, inputClassName, ...inputProps} = this.props
     inputProps.type = inputProps.type || 'search'
     inputProps.value = this.state.searchTerm
     inputProps.onChange = this.updateSearch
+    inputProps.className = inputClassName
     inputProps.placeholder = inputProps.placeholder || 'Search'
     return (
       <div className={className}>
