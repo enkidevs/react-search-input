@@ -52,6 +52,7 @@ const Search = React.createClass({
     inputProps.placeholder = inputProps.placeholder || 'Search'
     return (
       <div className={className}>
+        <img width="15px" height="15px" src="svg/magnifying_glass_icon.svg" />
         <input {...inputProps} />
       </div>
     )
