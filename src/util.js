@@ -1,10 +1,16 @@
 import Fuse from 'fuse.js'
 
+function flatten(array) {
+  return array.reduce((flat, toFlatten) => (
+    flat.concat(Array.isArray(toFlatten) ? flatten(toFlatten) : toFlatten)
+  ), []);
+}
+
 export function getValuesForKey (key, item) {
   const keys = key.split('.')
   let results = [item]
   keys.forEach(_key => {
-    const tmp = []
+    let tmp = []
     results.forEach(result => {
       if (result) {
         if (result instanceof Array) {
@@ -22,6 +28,10 @@ export function getValuesForKey (key, item) {
         }
       }
     })
+
+    // Support arrays and Immutable lists.
+    tmp = tmp.map(r => (r && r.push && r.toArray) ? r.toArray() : r)
+    tmp = flatten(tmp);
 
     results = tmp
   })
