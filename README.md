@@ -93,7 +93,7 @@ Define the value of the input.
 
 Return a function which can be used to filter an array. `keys` can be `String`, `[String]` or `null`.
 
-If an array `keys` is an array, the function will return true if at least one of the keys of the item matches the serch term.
+If an array `keys` is an array, the function will return true if at least one of the keys of the item matches the search term.
 
 ### Static Methods
 
@@ -101,7 +101,7 @@ If an array `keys` is an array, the function will return true if at least one of
 
 Return a function which can be used to filter an array. `searchTerm` can be a `regex` or a `String`. `keys` can be `String`, `[String]` or `null`.
 
-If an array `keys` is an array, the function will return true if at least one of the keys of the item matches the serch term.
+If an array `keys` is an array, the function will return true if at least one of the keys of the item matches the search term.
 
 ## Styles
 
