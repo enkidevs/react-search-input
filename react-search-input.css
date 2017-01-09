@@ -4,17 +4,15 @@
   position: relative;
 }
 
-.search-input::before {
-  content: "\26b2";
+.search-input > img {
   display: block;
   position: absolute;
   width: 15px;
   z-index: 3;
   height: 15px;
-  transform: rotate(-45deg);
   font-size: 20px;
-  top: 11px;
-  left: 13px;
+  top: 18px;
+  left: 18px;
   line-height: 32px;
 }
 
