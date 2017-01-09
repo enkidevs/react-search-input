@@ -79,7 +79,7 @@ export function createFilter (term, keys, caseSensitive, fuzzy) {
     return terms.every(term => {
       // allow search in specific fields with the syntax `field:search`
       let currentKeys
-      if (term.indexOf(':') > -1) {
+      if (term.indexOf(':') !== -1) {
         const searchedField = term.split(':')[0]
         term = term.split(':')[1]
         currentKeys = keys.filter(key => key.toLowerCase().indexOf(searchedField) > -1)
@@ -87,7 +87,7 @@ export function createFilter (term, keys, caseSensitive, fuzzy) {
         currentKeys = keys
       }
 
-      return currentKeys.find(key => {
+      return currentKeys.some(key => {
         const values = getValuesForKey(key, item)
         return searchStrings(values, term, caseSensitive, fuzzy)
       })
