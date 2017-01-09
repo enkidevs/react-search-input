@@ -44,7 +44,7 @@ const Search = React.createClass({
   },
 
   render () {
-    const {className, onChange, caseSensitive, throttle, filterKeys, value, fuzzy, inputClassName, ...inputProps} = this.props
+    const {className, onChange, caseSensitive, throttle, filterKeys, value, fuzzy, inputClassName, ...inputProps} = this.props // eslint-disable-line no-unused-vars
     inputProps.type = inputProps.type || 'search'
     inputProps.value = this.state.searchTerm
     inputProps.onChange = this.updateSearch
