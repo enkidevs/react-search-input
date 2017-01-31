@@ -20,7 +20,7 @@
     "react": "^15.1.0",
     "react-dom": "^15.1.0",
     "standard": "^8.6.0",
-    "webpack": "^1.12.15"
+    "webpack": "^2.2.1"
   },
   "scripts": {
     "test": "standard && jest",
