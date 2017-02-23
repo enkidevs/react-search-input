@@ -16,7 +16,7 @@
     "babel-preset-react": "^6.5.0",
     "babel-preset-stage-0": "^6.5.0",
     "immutable": "^3.8.1",
-    "jest": "^18.1.0",
+    "jest": "^19.0.2",
     "react": "^15.1.0",
     "react-dom": "^15.1.0",
     "standard": "^8.6.0",
