@@ -1,19 +1,20 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { createFilter } from './util'
 
 const Search = React.createClass({
   propTypes: {
-    className: React.PropTypes.string,
-    inputClassName: React.PropTypes.string,
-    onChange: React.PropTypes.func,
-    caseSensitive: React.PropTypes.bool,
-    fuzzy: React.PropTypes.bool,
-    throttle: React.PropTypes.number,
-    filterKeys: React.PropTypes.oneOf([
-      React.PropTypes.string,
-      React.PropTypes.arrayOf(React.PropTypes.string)
+    className: PropTypes.string,
+    inputClassName: PropTypes.string,
+    onChange: PropTypes.func,
+    caseSensitive: PropTypes.bool,
+    fuzzy: PropTypes.bool,
+    throttle: PropTypes.number,
+    filterKeys: PropTypes.oneOf([
+      PropTypes.string,
+      PropTypes.arrayOf(PropTypes.string)
     ]),
-    value: React.PropTypes.string
+    value: PropTypes.string
   },
 
   getDefaultProps () {
