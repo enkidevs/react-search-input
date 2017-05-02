@@ -8,6 +8,7 @@ const Search = React.createClass({
     inputClassName: PropTypes.string,
     onChange: PropTypes.func,
     caseSensitive: PropTypes.bool,
+    sortResults: PropTypes.bool,
     fuzzy: PropTypes.bool,
     throttle: PropTypes.number,
     filterKeys: PropTypes.oneOf([
@@ -45,7 +46,7 @@ const Search = React.createClass({
   },
 
   render () {
-    const {className, onChange, caseSensitive, throttle, filterKeys, value, fuzzy, inputClassName, ...inputProps} = this.props // eslint-disable-line no-unused-vars
+    const {className, onChange, caseSensitive, sortResults, throttle, filterKeys, value, fuzzy, inputClassName, ...inputProps} = this.props // eslint-disable-line no-unused-vars
     inputProps.type = inputProps.type || 'search'
     inputProps.value = this.state.searchTerm
     inputProps.onChange = this.updateSearch
@@ -72,7 +73,8 @@ const Search = React.createClass({
   },
 
   filter (keys) {
-    return createFilter(this.state.searchTerm, keys || this.props.filterKeys, this.props.caseSensitive, this.props.fuzzy)
+    const {filterKeys, caseSensitive, fuzzy, sortResults} = this.props
+    return createFilter(this.state.searchTerm, keys || filterKeys, {caseSensitive, fuzzy, sortResults})
   }
 })
 

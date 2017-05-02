@@ -29,7 +29,7 @@ export function getValuesForKey (key, item) {
   return results.filter(r => typeof r === 'string' || typeof r === 'number')
 }
 
-export function searchStrings (strings, term, caseSensitive, fuzzy) {
+export function searchStrings (strings, term, {caseSensitive, fuzzy, sortResults} = {}) {
   strings = strings.map(e => e.toString())
 
   try {
@@ -37,7 +37,10 @@ export function searchStrings (strings, term, caseSensitive, fuzzy) {
       if (typeof strings.toJS === 'function') {
         strings = strings.toJS()
       }
-      const fuse = new Fuse(strings.map(s => { return {id: s} }), { keys: ['id'], id: 'id', caseSensitive })
+      const fuse = new Fuse(
+        strings.map(s => { return {id: s} }),
+        { keys: ['id'], id: 'id', caseSensitive, shouldSort: sortResults }
+      )
       return fuse.search(term).length
     }
     return strings.some(value => {
@@ -58,18 +61,18 @@ export function searchStrings (strings, term, caseSensitive, fuzzy) {
   }
 }
 
-export function createFilter (term, keys, caseSensitive, fuzzy) {
+export function createFilter (term, keys, options = {}) {
   return (item) => {
     if (term === '') { return true }
 
-    if (!caseSensitive) {
+    if (!options.caseSensitive) {
       term = term.toLowerCase()
     }
 
     const terms = term.split(' ')
 
     if (!keys) {
-      return terms.every(term => searchStrings([item], term, caseSensitive, fuzzy))
+      return terms.every(term => searchStrings([item], term, options))
     }
 
     if (typeof keys === 'string') {
@@ -89,7 +92,7 @@ export function createFilter (term, keys, caseSensitive, fuzzy) {
 
       return currentKeys.some(key => {
         const values = getValuesForKey(key, item)
-        return searchStrings(values, term, caseSensitive, fuzzy)
+        return searchStrings(values, term, options)
       })
     })
   }

@@ -6,3 +6,4 @@ example/lib
 example/app.bundle.js
 /lib
 coverage
+.vscode/
