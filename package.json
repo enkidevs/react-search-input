@@ -19,7 +19,7 @@
     "jest": "^19.0.2",
     "react": "^15.1.0",
     "react-dom": "^15.1.0",
-    "standard": "^9.0.0",
+    "standard": "^10.0.2",
     "webpack": "^2.2.1"
   },
   "scripts": {
