@@ -1,8 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import createReactClass from 'create-react-class'
 import { createFilter } from './util'
 
-const Search = React.createClass({
+const Search = createReactClass({
   propTypes: {
     className: PropTypes.string,
     inputClassName: PropTypes.string,

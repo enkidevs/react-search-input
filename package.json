@@ -46,6 +46,7 @@
   "homepage": "https://github.com/enkidevs/react-search-input",
   "dependencies": {
     "fuse.js": "^3.0.0",
-    "prop-types": "^15.5.8"
+    "prop-types": "^15.5.8",
+    "create-react-class": "^15.5.2"
   }
 }
