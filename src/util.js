@@ -29,12 +29,12 @@ export function getValuesForKey (key, item) {
       }
     })
 
-    // Support arrays and Immutable lists.
-    tmp = tmp.map(r => (r && r.push && r.toArray) ? r.toArray() : r)
-    tmp = flatten(tmp)
-
     results = tmp
   })
+  
+  // Support arrays and Immutable lists.
+  results = results.map(r => (r && r.push && r.toArray) ? r.toArray() : r)
+  results = flatten(results)
 
   return results.filter(r => typeof r === 'string' || typeof r === 'number')
 }
