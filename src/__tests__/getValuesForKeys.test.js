@@ -26,6 +26,13 @@ test('should get the values to search on in a nested object', () => {
 })
 
 test('should get the values to search on in a nested array', () => {
+  const value = getValuesForKey('foo', {
+    foo: ['bar', 'baz']
+  })
+  expect(value).toEqual(['bar', 'baz'])
+})
+
+test('should get the values to search on in a nested array', () => {
   const value = getValuesForKey('foo.bar', {
     foo: [{
       bar: 'baz'
