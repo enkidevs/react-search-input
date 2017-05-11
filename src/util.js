@@ -31,7 +31,7 @@ export function getValuesForKey (key, item) {
 
     results = tmp
   })
-  
+
   // Support arrays and Immutable lists.
   results = results.map(r => (r && r.push && r.toArray) ? r.toArray() : r)
   results = flatten(results)
