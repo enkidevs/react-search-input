@@ -1,9 +1,9 @@
 import Fuse from 'fuse.js'
 
-function flatten(array) {
+function flatten (array) {
   return array.reduce((flat, toFlatten) => (
     flat.concat(Array.isArray(toFlatten) ? flatten(toFlatten) : toFlatten)
-  ), []);
+  ), [])
 }
 
 export function getValuesForKey (key, item) {
@@ -31,7 +31,7 @@ export function getValuesForKey (key, item) {
 
     // Support arrays and Immutable lists.
     tmp = tmp.map(r => (r && r.push && r.toArray) ? r.toArray() : r)
-    tmp = flatten(tmp);
+    tmp = flatten(tmp)
 
     results = tmp
   })
