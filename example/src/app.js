@@ -17,12 +17,12 @@ const App = React.createClass({
 
     return (
       <div>
-        <SearchInput className="search-input" onChange={this.searchUpdated} />
+        <SearchInput className='search-input' onChange={this.searchUpdated} />
         {filteredEmails.map(email => {
           return (
-            <div className="mail" key={email.id}>
-              <div className="from">{email.user.name}</div>
-              <div className="subject">{email.subject}</div>
+            <div className='mail' key={email.id}>
+              <div className='from'>{email.user.name}</div>
+              <div className='subject'>{email.subject}</div>
             </div>
           )
         })}

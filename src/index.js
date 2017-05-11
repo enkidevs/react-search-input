@@ -1,19 +1,22 @@
 import React from 'react'
+import PropTypes from 'prop-types'
+import createReactClass from 'create-react-class'
 import { createFilter } from './util'
 
-const Search = React.createClass({
+const Search = createReactClass({
   propTypes: {
-    className: React.PropTypes.string,
-    inputClassName: React.PropTypes.string,
-    onChange: React.PropTypes.func,
-    caseSensitive: React.PropTypes.bool,
-    fuzzy: React.PropTypes.bool,
-    throttle: React.PropTypes.number,
-    filterKeys: React.PropTypes.oneOf([
-      React.PropTypes.string,
-      React.PropTypes.arrayOf(React.PropTypes.string)
+    className: PropTypes.string,
+    inputClassName: PropTypes.string,
+    onChange: PropTypes.func,
+    caseSensitive: PropTypes.bool,
+    sortResults: PropTypes.bool,
+    fuzzy: PropTypes.bool,
+    throttle: PropTypes.number,
+    filterKeys: PropTypes.oneOf([
+      PropTypes.string,
+      PropTypes.arrayOf(PropTypes.string)
     ]),
-    value: React.PropTypes.string
+    value: PropTypes.string
   },
 
   getDefaultProps () {
@@ -44,7 +47,7 @@ const Search = React.createClass({
   },
 
   render () {
-    const {className, onChange, caseSensitive, throttle, filterKeys, value, fuzzy, inputClassName, ...inputProps} = this.props
+    const {className, onChange, caseSensitive, sortResults, throttle, filterKeys, value, fuzzy, inputClassName, ...inputProps} = this.props // eslint-disable-line no-unused-vars
     inputProps.type = inputProps.type || 'search'
     inputProps.value = this.state.searchTerm
     inputProps.onChange = this.updateSearch
@@ -71,7 +74,8 @@ const Search = React.createClass({
   },
 
   filter (keys) {
-    return createFilter(this.state.searchTerm, keys || this.props.filterKeys, this.props.caseSensitive, this.props.fuzzy)
+    const {filterKeys, caseSensitive, fuzzy, sortResults} = this.props
+    return createFilter(this.state.searchTerm, keys || filterKeys, {caseSensitive, fuzzy, sortResults})
   }
 })
 

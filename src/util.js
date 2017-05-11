@@ -39,7 +39,7 @@ export function getValuesForKey (key, item) {
   return results.filter(r => typeof r === 'string' || typeof r === 'number')
 }
 
-export function searchStrings (strings, term, caseSensitive, fuzzy) {
+export function searchStrings (strings, term, {caseSensitive, fuzzy, sortResults} = {}) {
   strings = strings.map(e => e.toString())
 
   try {
@@ -47,7 +47,10 @@ export function searchStrings (strings, term, caseSensitive, fuzzy) {
       if (typeof strings.toJS === 'function') {
         strings = strings.toJS()
       }
-      const fuse = new Fuse(strings.map(s => { return {id: s} }), { keys: ['id'], id: 'id', caseSensitive })
+      const fuse = new Fuse(
+        strings.map(s => { return {id: s} }),
+        { keys: ['id'], id: 'id', caseSensitive, shouldSort: sortResults }
+      )
       return fuse.search(term).length
     }
     return strings.some(value => {
@@ -68,18 +71,18 @@ export function searchStrings (strings, term, caseSensitive, fuzzy) {
   }
 }
 
-export function createFilter (term, keys, caseSensitive, fuzzy) {
+export function createFilter (term, keys, options = {}) {
   return (item) => {
     if (term === '') { return true }
 
-    if (!caseSensitive) {
+    if (!options.caseSensitive) {
       term = term.toLowerCase()
     }
 
     const terms = term.split(' ')
 
     if (!keys) {
-      return terms.every(term => searchStrings([item], term, caseSensitive, fuzzy))
+      return terms.every(term => searchStrings([item], term, options))
     }
 
     if (typeof keys === 'string') {
@@ -89,7 +92,7 @@ export function createFilter (term, keys, caseSensitive, fuzzy) {
     return terms.every(term => {
       // allow search in specific fields with the syntax `field:search`
       let currentKeys
-      if (term.indexOf(':') > -1) {
+      if (term.indexOf(':') !== -1) {
         const searchedField = term.split(':')[0]
         term = term.split(':')[1]
         currentKeys = keys.filter(key => key.toLowerCase().indexOf(searchedField) > -1)
@@ -97,9 +100,9 @@ export function createFilter (term, keys, caseSensitive, fuzzy) {
         currentKeys = keys
       }
 
-      return currentKeys.find(key => {
+      return currentKeys.some(key => {
         const values = getValuesForKey(key, item)
-        return searchStrings(values, term, caseSensitive, fuzzy)
+        return searchStrings(values, term, options)
       })
     })
   }

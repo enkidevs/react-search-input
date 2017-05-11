@@ -83,6 +83,10 @@ Define if the search should be case sensitive. Default is `false`
 
 Define if the search should be fuzzy. Default is `false`
 
+##### sortResults
+
+Define if search results should be sorted by relevance (only works with fuzzy search). Default is `false`
+
 ##### value
 
 Define the value of the input.
@@ -97,7 +101,7 @@ If an array `keys` is an array, the function will return true if at least one of
 
 ### Static Methods
 
-##### filter(searchTerm, [keys], [caseSensitive])
+##### filter(searchTerm, [keys], [{caseSensitive, fuzzy, sortResults}])
 
 Return a function which can be used to filter an array. `searchTerm` can be a `regex` or a `String`. `keys` can be `String`, `[String]` or `null`.
 

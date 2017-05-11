@@ -8,7 +8,4 @@ build:
 clean:
 	rm -rf lib && rm -rf example/lib && rm -f example/app.bundle.js
 
-lint:
-	$(BIN)/eslint src && $(BIN)/eslint tests
-
-PHONY: build clean lint
+PHONY: build clean

@@ -1,6 +1,6 @@
 {
   "name": "react-search-input",
-  "version": "0.10.4",
+  "version": "0.11.1",
   "description": "Simple react.js component for a search input, providing a filter function.",
   "main": "lib/index.js",
   "jsnext:main": "src/index.js",
@@ -9,28 +9,20 @@
     "src"
   ],
   "devDependencies": {
-    "babel": "^6.5.2",
     "babel-cli": "^6.8.0",
-    "babel-core": "^6.7.6",
-    "babel-eslint": "^6.0.2",
-    "babel-polyfill": "^6.7.4",
+    "babel-jest": "^19.0.0",
     "babel-preset-es2015": "^6.6.0",
     "babel-preset-react": "^6.5.0",
     "babel-preset-stage-0": "^6.5.0",
-    "babel-register": "^6.7.2",
-    "chai": "^3.5.0",
-    "chai-as-promised": "^5.3.0",
-    "eslint": "^3.3.0",
-    "eslint-config-standard": "^5.1.0",
-    "eslint-plugin-promise": "^2.0.1",
-    "eslint-plugin-standard": "^2.0.0",
-    "mocha": "^3.0.2",
+    "immutable": "^3.8.1",
+    "jest": "^19.0.2",
     "react": "^15.1.0",
     "react-dom": "^15.1.0",
-    "sinon": "^1.17.3",
-    "webpack": "^1.12.15"
+    "standard": "^10.0.2",
+    "webpack": "^2.2.1"
   },
   "scripts": {
+    "test": "standard && jest",
     "prepublish": "make clean build"
   },
   "repository": {
@@ -46,13 +38,15 @@
     "javascript",
     "react-component"
   ],
-  "author": "Mathieu Dutour",
+  "author": "Mathieu Dutour <mathieu@dutour.me>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/enkidevs/react-search-input/issues"
   },
   "homepage": "https://github.com/enkidevs/react-search-input",
   "dependencies": {
-    "fuse.js": "^2.2.0"
+    "fuse.js": "^3.0.0",
+    "prop-types": "^15.5.8",
+    "create-react-class": "^15.5.2"
   }
 }
