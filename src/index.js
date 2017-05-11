@@ -69,13 +69,20 @@ const Search = createReactClass({
         clearTimeout(this._throttleTimeout)
       }
 
-      this._throttleTimeout = setTimeout(() => this.props.onChange(searchTerm), this.props.throttle)
+      this._throttleTimeout = setTimeout(
+        () => this.props.onChange(searchTerm),
+        this.props.throttle
+      )
     })
   },
 
   filter (keys) {
     const {filterKeys, caseSensitive, fuzzy, sortResults} = this.props
-    return createFilter(this.state.searchTerm, keys || filterKeys, {caseSensitive, fuzzy, sortResults})
+    return createFilter(
+      this.state.searchTerm,
+      keys || filterKeys,
+      {caseSensitive, fuzzy, sortResults}
+    )
   }
 })
 
