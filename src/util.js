@@ -59,7 +59,7 @@ export function searchStrings (strings, term, {caseSensitive, fuzzy, sortResults
           value = value.toLowerCase()
         }
         if (exactMatch) {
-          term = new RegExp('/^'+term+'$/', 'i')
+          term = new RegExp('^' + term + '$', 'i')
         }
         if (value && value.search(term) !== -1) {
           return true
