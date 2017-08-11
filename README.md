@@ -17,16 +17,21 @@ npm install react-search-input --save
 ## Example
 
 ```javascript
+import React, {Component} from 'react'
 import SearchInput, {createFilter} from 'react-search-input'
 
 import emails from './mails'
 
 const KEYS_TO_FILTERS = ['user.name', 'subject', 'dest.name']
 
-const App = React.createClass({
-  getInitialState () {
-    return { searchTerm: '' }
-  },
+class App extends Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      searchTerm: ''
+    }
+    this.searchUpdated = this.searchUpdated.bind(this)
+  }
 
   render () {
     const filteredEmails = emails.filter(createFilter(this.state.searchTerm, KEYS_TO_FILTERS))
@@ -44,12 +49,12 @@ const App = React.createClass({
         })}
       </div>
     )
-  },
+  }
 
   searchUpdated (term) {
     this.setState({searchTerm: term})
   }
-})
+}
 
 ```
 

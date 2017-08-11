@@ -4,10 +4,7 @@
   "description": "Simple react.js component for a search input, providing a filter function.",
   "main": "lib/index.js",
   "jsnext:main": "src/index.js",
-  "files": [
-    "lib",
-    "src"
-  ],
+  "files": ["lib", "src"],
   "devDependencies": {
     "babel-cli": "^6.8.0",
     "babel-jest": "^19.0.0",
@@ -46,7 +43,6 @@
   "homepage": "https://github.com/enkidevs/react-search-input",
   "dependencies": {
     "fuse.js": "^3.0.0",
-    "prop-types": "^15.5.8",
-    "create-react-class": "^15.5.2"
+    "prop-types": "^15.5.8"
   }
 }
