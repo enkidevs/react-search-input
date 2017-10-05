@@ -76,6 +76,11 @@ Function called when the search term is changed (will be passed as an argument).
 
 Either an `[String]` or a `String`. Will be use by the `filter` method if no argument is passed there.
 
+
+##### inputComponent
+
+Define a custom component to render such as react-bootstrap's `FormControl` or material-ui's `TextField`. Default is `'input'`.
+
 ##### throttle
 
 Reduce call frequency to the `onChange` function (in ms). Default is `200`.
