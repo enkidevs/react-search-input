@@ -118,4 +118,6 @@ Look at [react-search-input.css](react-search-input.css) for an idea on how to s
 
 ---
 
+## Ref
+Passing ref to input with inputRef property
 MIT Licensed
