@@ -39,7 +39,7 @@ export function getValuesForKey (key, item) {
   return results.filter(r => typeof r === 'string' || typeof r === 'number')
 }
 
-export function searchStrings (strings, term, {caseSensitive, fuzzy, sortResults, exactMatch} = {}) {
+export function searchStrings (strings, term, {caseSensitive, fuzzy, sortResults, exactMatch, regexMatch} = {}) {
   strings = strings.map(e => e.toString())
 
   try {
@@ -60,7 +60,9 @@ export function searchStrings (strings, term, {caseSensitive, fuzzy, sortResults
         }
         if (exactMatch) {
           term = new RegExp('^' + term + '$', 'i')
-        }
+        } else if (regexMatch) {
+          term = new RegExp(term, 'i')
+	}
         if (value && value.search(term) !== -1) {
           return true
         }
